@@ -17,19 +17,18 @@
         $(document).ready(function () {
 
             var arr6 = [
-                { title: "مصر الجديدة", href: "#1", dataAttrs: [{ title: "dataattr1", data: "value1" }, { title: "dataattr2", data: "value2" }, { title: "dataattr3", data: "value3" }] }
+                { title: "Indian", href: "#", dataAttrs: [{ title: "dataattr1", data: "value1" }, { title: "dataattr2", data: "value2" }, { title: "dataattr3", data: "value3" }] }
                 ,
-                { title: "مدينة نصر", href: "#2", dataAttrs: [{ title: "dataattr4", data: "value4" }, { title: "dataattr5", data: "value5" }, { title: "dataattr6", data: "value6" }] }
+                { title: "Egypt", href: "#", dataAttrs: [{ title: "dataattr4", data: "value4" }, { title: "dataattr5", data: "value5" }, { title: "dataattr6", data: "value6" }] }
                 ,
-                { title: "العباسية", href: "#3", dataAttrs: [{ title: "dataattr7", data: "value7" }, { title: "dataattr8", data: "value8" }, { title: "dataattr9", data: "value9" }] }
+                { title: "Bangaldesh", href: "#", dataAttrs: [{ title: "dataattr7", data: "value7" }, { title: "dataattr8", data: "value8" }, { title: "dataattr9", data: "value9" }] }
             ];
 
             var arr5 = [
-                { title: "القاهرة", href: "#1", dataAttrs: [{ title: "dataattr1", data: "value1" }, { title: "dataattr2", data: "value2" }, { title: "dataattr3", data: "value3" }], data: arr6 }
-                ,
-                { title: "الجيزة", href: "#2", dataAttrs: [{ title: "dataattr4", data: "value4" }, { title: "dataattr5", data: "value5" }, { title: "dataattr6", data: "value6" }] }
-                ,
-                { title: "الأسكندرية", href: "#3", dataAttrs: [{ title: "dataattr7", data: "value7" }, { title: "dataattr8", data: "value8" }, { title: "dataattr9", data: "value9" }] }
+
+                { title: "Qatari", href: "#", dataAttrs: [{ title: "dataattr4", data: "value4" }, { title: "dataattr5", data: "value5" }, { title: "dataattr6", data: "value6" }] },
+                { title: "NonQatari", href: "#", dataAttrs: [{ title: "dataattr1", data: "value1" }, { title: "dataattr2", data: "value2" }, { title: "dataattr3", data: "value3" }], data: arr6 }
+                               
             ];
 
             var options4 = {
@@ -41,17 +40,37 @@
                 selectChildren: true,
                 multiSelect: true,
                 rtl: true,
-                checkHandler: function (element) {          
-                  
-                    $("#firstDropDownTree4").SetTitle($(element).closest('li').find("a").first().text());
-                   
+                checkHandler: function (element, e, checked) {
+
+                    if (checked) {
+                        $("#firstDropDownTree4").SetTitle($(element).closest('li').find("a").first().text());
+
+                        $(element).closest('li').find('.select-box').each(function (idx, item) {
+                            $(item).removeClass('fa-square-o');
+                            $(item).addClass('fa-check-square-o');
+                            //if ($(item).closest('li').find("a").first().text() != '') {
+                            //    $("#firstDropDownTree4").SetTitle($(item).closest('li').find("a").first().text());
+                            //}
+                        });
+                    }
+                    else {
+                        //alert($(element).closest('li').find('a').length);
+                        $("#firstDropDownTree4").RemoveTitle(element);
+
+                    }
+
                 },
-                clickHandler: function (element) {                    
-                    $("#firstDropDownTree4").SetTitle($(element).find("a").first().text());
+                clickHandler: function (element) {
+                    if ($(element).find("a").first().text() != '') {
+                        $("#firstDropDownTree4").SetTitle($(element).find("a").first().text());
+                    }
+                    $("#firstDropDownTree4").SetTitle($(element).closest('li').find("a").first().text());
                     $(element).closest('li').find('.select-box').each(function (idx, item) {
                         $(item).removeClass('fa-square-o');
                         $(item).addClass('fa-check-square-o');
-
+                        //if ($(item).closest('li').find("a").first().text() != '') {
+                        //    $("#firstDropDownTree4").SetTitle($(item).closest('li').find("a").first().text());
+                        //}
                     });
                 },
             }
@@ -68,11 +87,11 @@
                 <tr>
                     <td>
                         <h3>RTL:</h3>
-            <div class="dropdown dropdown-tree" id="firstDropDownTree4"></div>
+                        <div class="dropdown dropdown-tree" id="firstDropDownTree4"></div>
                     </td>
                 </tr>
             </table>
-           
+
         </div>
     </form>
 </body>
