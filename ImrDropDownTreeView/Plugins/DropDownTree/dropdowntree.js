@@ -100,7 +100,7 @@ var globalTreeIdCounter = 0;
                 if ($(item).closest('a').text() == title) {
                     $(item).removeClass("fa-check-square-o");
                     $(item).addClass("fa-square-o");
-                }
+                } 
             });
            
             $(this).closest('div').remove();
