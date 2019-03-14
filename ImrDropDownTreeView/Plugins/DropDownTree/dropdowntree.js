@@ -88,7 +88,7 @@ var globalTreeIdCounter = 0;
         //handlers binders
         //element click handler
         $(options.element).on("click", "li", function (e) {
-            tree.init.prototype.clickedElement = $(this);
+            tree.init.prototype.clickedElement = $(this); 
             options.clickHandler(tree.clickedElement, e);
             e.stopPropagation();
         });
