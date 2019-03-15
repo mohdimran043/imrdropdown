@@ -45,9 +45,9 @@ var globalTreeIdCounter = 0;
 
                     var checkboxHTML = isSelected ? 'fa-check-square-o' : 'fa-square-o ';
 
-                    element.append('<li id="TreeElement' + globalTreeIdCounter + '"' + dataAttrs + '>' + (options.multiSelect ? '<i class="fa select-box ' + checkboxHTML + '" aria-hidden="true"></i>' : '') + '<a href="' + ((typeof data[i].href != "undefined" && data[i].href != null) ? data[i].href : '#') + '">' + data[i].title + '</a></li>');
+                    element.append('<li id="TreeElement' + globalTreeIdCounter + '"' + dataAttrs + '>' + (options.multiSelect ? '<i class="fa select-box ' + checkboxHTML + '" aria-hidden="true"></i>' : '') + '<a ' + dataAttrs + '>' + data[i].title + '</a></li>');
                     if (data[i].data !== null && typeof data[i].data !== "undefined") {
-                        $("#TreeElement" + globalTreeIdCounter).append("<ul style='display:none'></ul>");
+                        $("#TreeElement" + globalTreeIdCounter).append("<ul class='hide'></ul>");
                         $("#TreeElement" + globalTreeIdCounter).find("a").first().prepend('<span class="arrow">' + options.closedArrow + '</span>');
                         RenderData(data[i].data, $("#TreeElement" + globalTreeIdCounter).find("ul").first());
                     } else if (options.addChildren) {
@@ -57,9 +57,9 @@ var globalTreeIdCounter = 0;
                 else {
 
                     var checkboxHTML = isSelected ? 'fa-check-square-o' : 'fa-square-o ';
-                    element.find("ul").append('<li id="TreeElement' + globalTreeIdCounter + '"' + dataAttrs + '>' + (options.multiSelect ? '<i class="fa select-box ' + checkboxHTML + '" aria-hidden="true"></i>' : '') + '<a href="' + ((typeof data[i].href != "undefined" && data[i].href != null) ? data[i].href : '#') + '">' + data[i].title + '</a></li>');
+                    element.find("ul").append('<li id="TreeElement' + globalTreeIdCounter + '"' + dataAttrs + '>' + (options.multiSelect ? '<i class="fa select-box ' + checkboxHTML + '" aria-hidden="true"></i>' : '') + '<a ' + dataAttrs + '>' + data[i].title + '</a></li>');
                     if (data[i].data != null && typeof data[i].data != "undefined") {
-                        $("#TreeElement" + globalTreeIdCounter).append("<ul style='display:none'></ul>");
+                        $("#TreeElement" + globalTreeIdCounter).append("<ul class='hide'></ul>");
                         $("#TreeElement" + globalTreeIdCounter).find("a").first().prepend('<span class="arrow">' + options.closedArrow + '</span>');
                         RenderData(data[i].data, $("#TreeElement" + globalTreeIdCounter).find("ul").first());
                     } else if (options.addChildren) {
@@ -71,7 +71,8 @@ var globalTreeIdCounter = 0;
             $(".fa-check-square-o").each(function (index, item) {
                 var parentElement = $(element).closest('div');
                 var title = $(item).closest('li').find("a").first().text();
-                var schema = '<div class="title-item" data-value="111"><span class="fa fa-times"></span><span class="title">' + title + '</span></div>';
+                var anchorVal = $(item).closest('li').find("a").first().attr('data-value');
+                var schema = '<div class="title-item" data-value="' + anchorVal+'"><span class="fa fa-times"></span><span class="title">' + title + '</span></div>';
                 if ($(parentElement).find(".dropdowntree-name").text() == options.title) {
                     $(parentElement).find(".dropdowntree-name").html('');
 
@@ -152,12 +153,12 @@ var globalTreeIdCounter = 0;
             if ($(this).parents("li").first().find("ul").first().is(":visible")) {
                 expanded = false;
                 $(this).prepend(options.closedArrow);
-                $(this).parents("li").first().find("ul").first().hide();
+                $(this).parents("li").first().find("ul").first().addClass('hide');
                 // $(options.element).find('.dropdown-search').addClass('hide');
             } else {
                 expanded = true;
                 $(this).prepend(options.openedArrow);
-                $(this).parents("li").first().find("ul").first().show();
+                $(this).parents("li").first().find("ul").first().removeClass('hide');
                 //  $(options.element).find('.dropdown-search').removeClass('hide');
             }
             options.expandHandler($(this).parents("li").first(), e, expanded);
@@ -185,16 +186,16 @@ var globalTreeIdCounter = 0;
 
                         }
                         else {
-                           
+
 
                             $(this).closest("ul").parent().closest('li').find(".select-box").first().addClass("fa-square-o");
                             $(this).closest("ul").parent().closest('li').find(".select-box").first().removeClass("fa-check-square-o");
                             $(options.element).RemoveTitle($(this).closest("ul").closest("li").first().find(".select-box"));
-                            
+
                         }
                     }
                     else {
-                       //Logic to clear parent if child item are selected
+                        //Logic to clear parent if child item are selected
                         $(this).closest("li").find('ul').find('li').each(function (idx, childElement) {
                             $(options.element).RemoveTitle($(childElement).closest('li').find(".select-box"));
                             $(childElement).find(".select-box").removeClass("fa-check-square-o");
@@ -219,7 +220,7 @@ var globalTreeIdCounter = 0;
                 }
             }
             $(".fa-check-square-o").each(function (index, item) {
-                $(options.element).SetTitle($(item).closest('li').find("a").first().text());
+                $(options.element).SetTitle($(item).closest('li').find("a").first().text(), $(item).closest('li').find("a").first().attr('data-value'));
             });
             if (!checked) {
                 $(options.element).RemoveTitle($(this));
@@ -263,10 +264,10 @@ var globalTreeIdCounter = 0;
             });
 
         };
-        $(options.element).init.prototype.SetTitle = function (title) {
+        $(options.element).init.prototype.SetTitle = function (title, val) {
 
             // $(this).find(".dropdowntree-name").text(title);
-            var schema = '<div class="title-item" data-value="111"><span class="fa fa-times"></span><span class="title">' + title + '</span></div>';
+            var schema = '<div class="title-item" data-value="' + val + '"><span class="fa fa-times"></span><span class="title">' + title + '</span></div>';
             if ($(this).find(".dropdowntree-name").text() == options.title) {
                 $(this).find(".dropdowntree-name").html('');
 

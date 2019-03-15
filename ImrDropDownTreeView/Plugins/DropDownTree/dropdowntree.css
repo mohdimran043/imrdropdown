@@ -1,8 +1,47 @@
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
 .dropdown-tree > ul {
     overflow-y: auto;
     overflow-x: hidden;
     white-space: nowrap;
-
 }
 
 .dropdown-tree li {
@@ -88,13 +127,19 @@
 .fa-caret-left, .fa-caret-down {
     font-size: 1.65em;
 }
-.dropdown-tree .open{
-    transition: all 2.3s ease;
-}
+
 .dropdown-search {
-    display:none;
-    width:100%;
+    display: none;
+    width: 100%;
+  
 }
 .open > .dropdown-search {
-    display:block !important;
+    display: block !important;
+    -webkit-animation: fadeIn 1.4s;
+    animation: fadeIn 1.4s;
+}
+
+.open > .dropdown-menu {
+    -webkit-animation: fadeIn 1.4s;
+    animation: fadeIn 1.4s;
 }
