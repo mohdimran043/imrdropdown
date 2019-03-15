@@ -159,6 +159,9 @@ var globalTreeIdCounter = 0;
                // alert($(item).closest('li').find("a").first().text());
                 $(options.element).SetTitle($(item).closest('li').find("a").first().text());
             });
+            if (!checked) {
+                $(options.element).RemoveTitle($(this));
+            }
             options.checkHandler($(this).parents("li").first(), e, checked);
         });
 

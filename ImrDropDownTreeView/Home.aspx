@@ -40,40 +40,9 @@
                 rtl: true,
                 checkHandler: function (element, e, checked) {
 
-                    if (checked) {
-                       // $("#firstDropDownTree4").SetTitle($(element).closest('li').find("a").first().text());
-
-                        //$(element).closest('li').find('.select-box').each(function (idx, item) {
-                        //    $(item).removeClass('fa-square-o');
-                        //    $(item).addClass('fa-check-square-o');
-                        //    //if ($(item).closest('li').find("a").first().text() != '') {
-                        //    //    $("#firstDropDownTree4").SetTitle($(item).closest('li').find("a").first().text());
-                        //    //}
-                        //});
-                    }
-                    else {
-                        //alert($(element).closest('li').find('a').length);
-                        $("#firstDropDownTree4").RemoveTitle(element);
-
-                    }
-
                 },
                 clickHandler: function (element) {
-                    //if ($(element).find("a").first().text() != '') {
-                    //    $("#firstDropDownTree4").SetTitle($(element).find("a").first().text());
-                    //}
-                    //$("#firstDropDownTree4").SetTitle($(element).closest('li').find("a").first().text());
-                    //$(element).closest('li').find('.select-box').first().removeClass('fa-square-o');
-                    //$(element).closest('li').find('.select-box').first().addClass('fa-check-square-o');
-                    //alert( $(element).closest('li').find(".select-box").length);
                     $(element).closest('li').find(".select-box").first().trigger('click');
-                    //$(element).closest('li').find('.select-box').each(function (idx, item) {
-                    //    $(item).removeClass('fa-square-o');
-                    //    $(item).addClass('fa-check-square-o');
-                    //    //if ($(item).closest('li').find("a").first().text() != '') {
-                    //    //    $("#firstDropDownTree4").SetTitle($(item).closest('li').find("a").first().text());
-                    //    //}
-                    //});
                 },
             }
 
