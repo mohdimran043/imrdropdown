@@ -1,27 +1,3 @@
-/*    
-@licstart  The following is the entire license notice for the 
-JavaScript code in this page.
-
-Copyright (C) 2016  Joseph Safwat Khella
-
-The JavaScript code in this page is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.   
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this page.
-*/
 
 var dropDownOptions = {
     title: "Dropdown",
@@ -56,7 +32,7 @@ var globalTreeIdCounter = 0;
                 }
                 if (!element.is("li")) {
                     element.append('<li id="TreeElement' + globalTreeIdCounter + '"' + dataAttrs + '>' + (options.multiSelect ? '<i class="fa fa-square-o select-box" aria-hidden="true"></i>' : '') + '<a href="' + ((typeof data[i].href != "undefined" && data[i].href != null) ? data[i].href : '#') + '">' + data[i].title + '</a></li>');
-                    if (data[i].data != null && typeof data[i].data != "undefined") {
+                    if (data[i].data !== null && typeof data[i].data !== "undefined") {
                         $("#TreeElement" + globalTreeIdCounter).append("<ul style='display:none'></ul>");
                         $("#TreeElement" + globalTreeIdCounter).find("a").first().prepend('<span class="arrow">' + options.closedArrow + '</span>');
                         RenderData(data[i].data, $("#TreeElement" + globalTreeIdCounter).find("ul").first());
@@ -95,28 +71,27 @@ var globalTreeIdCounter = 0;
 
         $(options.element).on("click", ".fa-times", function (e) {
             var title = $(this).closest('div').find('.title').text();
-            var isLastElement = false,that;
-            $(this).closest('button').parent().find('.dropdown-menu').find('.fa-check-square-o').each(function (idx, item) {
-
-                if ($(item).closest('li').find('a').text() == title) {
+            var isLastElement = false, that;
+            $(this).closest('button').parent().find('.dropdown-menu').find('.fa-check-square-o').each(function (idx, item) {                
+                if ($(item).closest('li').first().find('a').first().text() === title) {
                     $(item).removeClass("fa-check-square-o");
                     $(item).addClass("fa-square-o");
                 }
             });
-           // alert($(this).closest('button').find('.title').length);
-            if ($(this).closest('button').find('.title').length == 1) {
+            
+            if ($(this).closest('button').find('.title').length === 1) {
                 isLastElement = true;
                 that = $(this).closest('button');
             }
-         
             $(this).closest('div').remove();
-           
+
             if (isLastElement) {
                 $(that).html('<span class="dropdowntree-name">' + options.title + '</span>');
             }
-         
+
             e.stopImmediatePropagation();
         });
+
         //arrow click handler close/open
         $(options.element).on("click", ".arrow", function (e) {
             e.stopPropagation();
@@ -144,8 +119,26 @@ var globalTreeIdCounter = 0;
                 $(this).removeClass("fa-square-o");
                 $(this).addClass("fa-check-square-o");
                 if (options.selectChildren) {
-                    $(this).parents("li").first().find(".select-box").removeClass("fa-square-o");
-                    $(this).parents("li").first().find(".select-box").addClass("fa-check-square-o");
+                    if ($(this).closest('li').attr('data-class') === 'child') {
+                        if ($(this).closest("ul").find('li').length === $(this).closest("ul").find('.fa-check-square-o').length) {
+                            $(this).closest("ul").find('li').each(function (idx, childElement) {
+                                $(options.element).RemoveTitle($(childElement).closest('li').find(".select-box"));
+                                $(childElement).find(".select-box").removeClass("fa-check-square-o");
+                                $(childElement).find(".select-box").addClass("fa-square-o");
+                                //alert($(childElement).closest('li').find("a").text());
+                                
+                            });
+                            $(this).closest("ul").parent().closest('li').find(".select-box").first().removeClass("fa-square-o");
+                            $(this).closest("ul").parent().closest('li').find(".select-box").first().addClass("fa-check-square-o");
+                        }
+                        else {
+
+                            $(this).closest("ul").parent().closest('li').find(".select-box").first().addClass("fa-square-o");
+                            $(this).closest("ul").parent().closest('li').find(".select-box").first().removeClass("fa-check-square-o");
+                            $(options.element).RemoveTitle($(this).closest("ul").closest("li").first().find(".select-box"));
+                        }
+                    }
+
                 }
             } else {
                 //will unselect
@@ -158,9 +151,14 @@ var globalTreeIdCounter = 0;
                     $(this).parents("li").each(function () {
                         $(this).find(".select-box").first().removeClass("fa-check-square-o");
                         $(this).find(".select-box").first().addClass("fa-square-o");
+                        options.checkHandler($(this), e, checked);
                     });
                 }
             }
+            $(".fa-check-square-o").each(function (index, item) {
+               // alert($(item).closest('li').find("a").first().text());
+                $(options.element).SetTitle($(item).closest('li').find("a").first().text());
+            });
             options.checkHandler($(this).parents("li").first(), e, checked);
         });
 
@@ -185,13 +183,9 @@ var globalTreeIdCounter = 0;
         $(options.element).init.prototype.RemoveTitle = function (element) {
             var isLastElement = false, that;
             $(element).closest('li').find('a').each(function (oidx, outerItem) {
-                //  alert($(outerItem).text() + ' ' + $(element).closest('.dropdown-tree').length);
                 $(element).closest('.dropdown-tree').find('.title').each(function (idx, item) {
-                    // alert($(this).closest('button').find('.title').length);
-                    
-
-                    if ($(item).text() == $(outerItem).text()) {
-                        if ($(this).closest('button').find('.title').length == 1) {
+                    if ($(item).text() === $(outerItem).text()) {
+                        if ($(this).closest('button').find('.title').length === 1) {
                             isLastElement = true;
                             that = $(this).closest('button');
                         }
@@ -200,7 +194,7 @@ var globalTreeIdCounter = 0;
                             $(that).html('<span class="dropdowntree-name">' + options.title + '</span>');
                         }
                     }
-                    
+
                 });
             });
 

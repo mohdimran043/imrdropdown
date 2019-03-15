@@ -17,18 +17,16 @@
         $(document).ready(function () {
 
             var arr6 = [
-                { title: "Indian", href: "#", dataAttrs: [{ title: "dataattr1", data: "value1" }, { title: "dataattr2", data: "value2" }, { title: "dataattr3", data: "value3" }] }
+                { title: "Indian", href: "#", dataAttrs: [{ title: "natcode", data: "35" }, { title: "class", data: "child" }] }
                 ,
-                { title: "Egypt", href: "#", dataAttrs: [{ title: "dataattr4", data: "value4" }, { title: "dataattr5", data: "value5" }, { title: "dataattr6", data: "value6" }] }
+                { title: "Egypt", href: "#", dataAttrs: [{ title: "natcode", data: "36" }, { title: "class", data: "child" }] }
                 ,
-                { title: "Bangaldesh", href: "#", dataAttrs: [{ title: "dataattr7", data: "value7" }, { title: "dataattr8", data: "value8" }, { title: "dataattr9", data: "value9" }] }
+                { title: "Bangaldesh", href: "#", dataAttrs: [{ title: "natcode", data: "39" }, { title: "class", data: "child" }] }
             ];
 
             var arr5 = [
-
-                { title: "Qatari", href: "#", dataAttrs: [{ title: "dataattr4", data: "value4" }, { title: "dataattr5", data: "value5" }, { title: "dataattr6", data: "value6" }] },
-                { title: "NonQatari", href: "#", dataAttrs: [{ title: "dataattr1", data: "value1" }, { title: "dataattr2", data: "value2" }, { title: "dataattr3", data: "value3" }], data: arr6 }
-                               
+                { title: "Qatari", href: "#", dataAttrs: [{ title: "natcode", data: "1" }] },
+                { title: "NonQatari", href: "#", dataAttrs: [{ title: "natcode", data: "others" }], data: arr6 }
             ];
 
             var options4 = {
@@ -43,15 +41,15 @@
                 checkHandler: function (element, e, checked) {
 
                     if (checked) {
-                        $("#firstDropDownTree4").SetTitle($(element).closest('li').find("a").first().text());
+                       // $("#firstDropDownTree4").SetTitle($(element).closest('li').find("a").first().text());
 
-                        $(element).closest('li').find('.select-box').each(function (idx, item) {
-                            $(item).removeClass('fa-square-o');
-                            $(item).addClass('fa-check-square-o');
-                            //if ($(item).closest('li').find("a").first().text() != '') {
-                            //    $("#firstDropDownTree4").SetTitle($(item).closest('li').find("a").first().text());
-                            //}
-                        });
+                        //$(element).closest('li').find('.select-box').each(function (idx, item) {
+                        //    $(item).removeClass('fa-square-o');
+                        //    $(item).addClass('fa-check-square-o');
+                        //    //if ($(item).closest('li').find("a").first().text() != '') {
+                        //    //    $("#firstDropDownTree4").SetTitle($(item).closest('li').find("a").first().text());
+                        //    //}
+                        //});
                     }
                     else {
                         //alert($(element).closest('li').find('a').length);
@@ -61,17 +59,21 @@
 
                 },
                 clickHandler: function (element) {
-                    if ($(element).find("a").first().text() != '') {
-                        $("#firstDropDownTree4").SetTitle($(element).find("a").first().text());
-                    }
-                    $("#firstDropDownTree4").SetTitle($(element).closest('li').find("a").first().text());
-                    $(element).closest('li').find('.select-box').each(function (idx, item) {
-                        $(item).removeClass('fa-square-o');
-                        $(item).addClass('fa-check-square-o');
-                        //if ($(item).closest('li').find("a").first().text() != '') {
-                        //    $("#firstDropDownTree4").SetTitle($(item).closest('li').find("a").first().text());
-                        //}
-                    });
+                    //if ($(element).find("a").first().text() != '') {
+                    //    $("#firstDropDownTree4").SetTitle($(element).find("a").first().text());
+                    //}
+                    //$("#firstDropDownTree4").SetTitle($(element).closest('li').find("a").first().text());
+                    //$(element).closest('li').find('.select-box').first().removeClass('fa-square-o');
+                    //$(element).closest('li').find('.select-box').first().addClass('fa-check-square-o');
+                    //alert( $(element).closest('li').find(".select-box").length);
+                    $(element).closest('li').find(".select-box").first().trigger('click');
+                    //$(element).closest('li').find('.select-box').each(function (idx, item) {
+                    //    $(item).removeClass('fa-square-o');
+                    //    $(item).addClass('fa-check-square-o');
+                    //    //if ($(item).closest('li').find("a").first().text() != '') {
+                    //    //    $("#firstDropDownTree4").SetTitle($(item).closest('li').find("a").first().text());
+                    //    //}
+                    //});
                 },
             }
 
