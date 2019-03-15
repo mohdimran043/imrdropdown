@@ -17,21 +17,22 @@
         $(document).ready(function () {
 
             var arr6 = [
-                { title: "Indian", href: "#", dataAttrs: [{ title: "natcode", data: "35" }, { title: "class", data: "child" }] }
+                { title: "Indian", href: "#", dataAttrs: [{ title: "value", data: "35" }, { title: "class", data: "child" }] }
                 ,
-                { title: "Egypt", href: "#", dataAttrs: [{ title: "natcode", data: "36" }, { title: "class", data: "child" }] }
+                { title: "Egypt", href: "#", dataAttrs: [{ title: "value", data: "36" }, { title: "class", data: "child" }] }
                 ,
-                { title: "Bangaldesh", href: "#", dataAttrs: [{ title: "natcode", data: "39" }, { title: "class", data: "child" }] }
+                { title: "Bangaldesh", href: "#", dataAttrs: [{ title: "value", data: "39" }, { title: "class", data: "child" }] }
             ];
 
             var arr5 = [
-                { title: "Qatari", href: "#", dataAttrs: [{ title: "natcode", data: "1" }] },
-                { title: "NonQatari", href: "#", dataAttrs: [{ title: "natcode", data: "others" }], data: arr6 }
+                { title: "Qatari", href: "#", dataAttrs: [{ title: "value", data: "1" }] },
+                { title: "NonQatari", href: "#", dataAttrs: [{ title: "value", data: "others" }], data: arr6 }
             ];
 
             var options4 = {
                 title: "None",
                 data: arr5,
+                selectedValues:'1,35',
                 maxHeight: 1300,
                 closedArrow: '<i class="fa fa-caret-right" aria-hidden="true"></i>',
                 openedArrow: '<i class="fa fa-caret-down" aria-hidden="true"></i>',

@@ -91,3 +91,10 @@
 .dropdown-tree .open{
     transition: all 2.3s ease;
 }
+.dropdown-search {
+    display:none;
+    width:100%;
+}
+.open > .dropdown-search {
+    display:block !important;
+}
