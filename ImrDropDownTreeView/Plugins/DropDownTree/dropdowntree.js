@@ -67,11 +67,8 @@ var globalTreeIdCounter = 0;
                     }
                 }
             }
-           
-            $(".fa-check-square-o").each(function (index, item) {    
-                //alert($(element).closest('div').html());                
-                //$(element).closest('div').SetTitle($(item).closest('li').find("a").first().text());
-                //$(element).closest('li').first().trigger('click');
+
+            $(".fa-check-square-o").each(function (index, item) {
                 var parentElement = $(element).closest('div');
                 var title = $(item).closest('li').find("a").first().text();
                 var schema = '<div class="title-item" data-value="111"><span class="fa fa-times"></span><span class="title">' + title + '</span></div>';
@@ -177,22 +174,32 @@ var globalTreeIdCounter = 0;
                 if (options.selectChildren) {
                     if ($(this).closest('li').attr('data-class') === 'child') {
                         if ($(this).closest("ul").find('li').length === $(this).closest("ul").find('.fa-check-square-o').length) {
-                            $(this).closest("ul").find('li').each(function (idx, childElement) {
-                                $(options.element).RemoveTitle($(childElement).closest('li').find(".select-box"));
-                                $(childElement).find(".select-box").removeClass("fa-check-square-o");
-                                $(childElement).find(".select-box").addClass("fa-square-o");
-                                //alert($(childElement).closest('li').find("a").text());
+                            //$(this).closest("ul").find('li').each(function (idx, childElement) {
+                            //    $(options.element).RemoveTitle($(childElement).closest('li').find(".select-box"));
+                            //    $(childElement).find(".select-box").removeClass("fa-check-square-o");
+                            //    $(childElement).find(".select-box").addClass("fa-square-o");                            
+                            //});
 
-                            });
-                            $(this).closest("ul").parent().closest('li').find(".select-box").first().removeClass("fa-square-o");
-                            $(this).closest("ul").parent().closest('li').find(".select-box").first().addClass("fa-check-square-o");
+                            //$(this).closest("ul").parent().closest('li').find(".select-box").first().removeClass("fa-square-o");
+                            //$(this).closest("ul").parent().closest('li').find(".select-box").first().addClass("fa-check-square-o");
+
                         }
                         else {
+                           
 
                             $(this).closest("ul").parent().closest('li').find(".select-box").first().addClass("fa-square-o");
                             $(this).closest("ul").parent().closest('li').find(".select-box").first().removeClass("fa-check-square-o");
                             $(options.element).RemoveTitle($(this).closest("ul").closest("li").first().find(".select-box"));
+                            
                         }
+                    }
+                    else {
+                       //Logic to clear parent if child item are selected
+                        $(this).closest("li").find('ul').find('li').each(function (idx, childElement) {
+                            $(options.element).RemoveTitle($(childElement).closest('li').find(".select-box"));
+                            $(childElement).find(".select-box").removeClass("fa-check-square-o");
+                            $(childElement).find(".select-box").addClass("fa-square-o");
+                        });
                     }
 
                 }
@@ -212,7 +219,6 @@ var globalTreeIdCounter = 0;
                 }
             }
             $(".fa-check-square-o").each(function (index, item) {
-                // alert($(item).closest('li').find("a").first().text());
                 $(options.element).SetTitle($(item).closest('li').find("a").first().text());
             });
             if (!checked) {
@@ -227,7 +233,7 @@ var globalTreeIdCounter = 0;
             }
         }
         $(options.element).append('<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="dropdowntree-name">' + options.title + '</span><span class="caret"></span></button>');
-        $(options.element).append('<input type="search" class="dropdown-search " placeholder="search" /><ul style="max-height: ' + options.maxHeight + 'px" class="dropdown-menu" aria-labelledby="dropdownMenu1"></ul>');
+        $(options.element).append('<input type="search" class="dropdown-search form-control" placeholder="search" /><ul style="max-height: ' + options.maxHeight + 'px" class="dropdown-menu" aria-labelledby="dropdownMenu1"></ul>');
 
         RenderData(options.data, $(options.element).find("ul").first());
 
@@ -258,7 +264,7 @@ var globalTreeIdCounter = 0;
 
         };
         $(options.element).init.prototype.SetTitle = function (title) {
-           
+
             // $(this).find(".dropdowntree-name").text(title);
             var schema = '<div class="title-item" data-value="111"><span class="fa fa-times"></span><span class="title">' + title + '</span></div>';
             if ($(this).find(".dropdowntree-name").text() == options.title) {
