@@ -68,7 +68,7 @@ var globalTreeIdCounter = 0;
                 }
             }
 
-            $(".fa-check-square-o").each(function (index, item) {
+            $(element).closest('div').find(".fa-check-square-o").each(function (index, item) {
                 var parentElement = $(element).closest('div');
                 var title = $(item).closest('li').find("a").first().text();
                 var anchorVal = $(item).closest('li').find("a").first().attr('data-value');
@@ -219,7 +219,7 @@ var globalTreeIdCounter = 0;
                     });
                 }
             }
-            $(".fa-check-square-o").each(function (index, item) {
+            $(options.element).find(".fa-check-square-o").each(function (index, item) {
                 $(options.element).SetTitle($(item).closest('li').find("a").first().text(), $(item).closest('li').find("a").first().attr('data-value'));
             });
             if (!checked) {
