@@ -123,19 +123,19 @@ var globalTreeIdCounter = 0;
             options.clickHandler(tree.clickedElement, e);
             e.stopPropagation();
         });
-        $(options.element).on("click", ".fa-times", function (e) {
+        $(options.element).on("click", ".fa-times", function (e) {            
             var title = $(this).closest('div').find('.title').text();
             var isLastElement = false, that;
-            $(this).closest('button').parent().find('.dropdown-menu').find('.fa-check-square-o').each(function (idx, item) {
+            $(this).closest('.button').parent().find('.dropdown-menu').find('.fa-check-square-o').each(function (idx, item) {
                 if ($(item).closest('li').first().find('a').first().text() === title) {
                     $(item).removeClass("fa-check-square-o");
                     $(item).addClass("fa-square-o");
                 }
             });
 
-            if ($(this).closest('button').find('.title').length === 1) {
+            if ($(this).closest('.button').find('.title').length === 1) {
                 isLastElement = true;
-                that = $(this).closest('button');
+                that = $(this).closest('.button');
             }
             $(this).closest('div').remove();
 
@@ -233,7 +233,7 @@ var globalTreeIdCounter = 0;
                 options.closedArrow = options.closedArrow.replace("fa-caret-right", "fa-caret-left");
             }
         }
-        $(options.element).append('<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="dropdowntree-name">' + options.title + '</span><span class="caret"></span></button>');
+        $(options.element).append('<div class="btn btn-default dropdown-toggle button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="dropdowntree-name">' + options.title + '</span><span class="caret"></span></div>');
         $(options.element).append('<input type="search" class="dropdown-search form-control" placeholder="search" /><ul style="max-height: ' + options.maxHeight + 'px" class="dropdown-menu" aria-labelledby="dropdownMenu1"></ul>');
 
         RenderData(options.data, $(options.element).find("ul").first());
@@ -250,9 +250,9 @@ var globalTreeIdCounter = 0;
             $(element).closest('li').find('a').each(function (oidx, outerItem) {
                 $(element).closest('.dropdown-tree').find('.title').each(function (idx, item) {
                     if ($(item).text() === $(outerItem).text()) {
-                        if ($(this).closest('button').find('.title').length === 1) {
+                        if ($(this).closest('.button').find('.title').length === 1) {
                             isLastElement = true;
-                            that = $(this).closest('button');
+                            that = $(this).closest('.button');
                         }
                         $(this).closest('div').remove();
                         if (isLastElement) {

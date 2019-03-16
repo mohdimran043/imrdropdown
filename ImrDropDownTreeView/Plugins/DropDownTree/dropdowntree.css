@@ -131,8 +131,8 @@
 .dropdown-search {
     display: none;
     width: 100%;
-  
 }
+
 .open > .dropdown-search {
     display: block !important;
     -webkit-animation: fadeIn 1.4s;
@@ -142,4 +142,8 @@
 .open > .dropdown-menu {
     -webkit-animation: fadeIn 1.4s;
     animation: fadeIn 1.4s;
+}
+
+.dropdowntree-name {
+    white-space: normal !important;
 }
