@@ -236,7 +236,9 @@ var globalTreeIdCounter = 0;
         $(options.element).append('<div class="btn btn-default dropdown-toggle button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="dropdowntree-name">' + options.title + '</span><span class="caret"></span></div>');
         $(options.element).append('<input type="search" class="dropdown-search form-control" placeholder="search" /><ul style="max-height: ' + options.maxHeight + 'px" class="dropdown-menu" aria-labelledby="dropdownMenu1"></ul>');
 
-        RenderData(options.data, $(options.element).find("ul").first());
+        $(options.element).each(function () {
+            RenderData(options.data, $(this).find("ul"));
+        });
 
 
 

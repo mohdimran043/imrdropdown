@@ -31,7 +31,7 @@
             var options4 = {
                 title: "None",
                 data: arr5,
-                selectedValues:'1,35',
+                selectedValues: '1,35',
                 maxHeight: 1300,
                 closedArrow: '<i class="fa fa-caret-right" aria-hidden="true"></i>',
                 openedArrow: '<i class="fa fa-caret-down" aria-hidden="true"></i>',
@@ -46,7 +46,7 @@
                 },
             }
 
-            $("#firstDropDownTree4").DropDownTree(options4);
+            $(".mytreeview").DropDownTree(options4);
 
         });
     </script>
@@ -58,7 +58,13 @@
                 <tr>
                     <td>
                         <h3>RTL:</h3>
-                        <div class="dropdown dropdown-tree" id="firstDropDownTree4"></div>
+                        <div class="dropdown dropdown-tree mytreeview" id="firstDropDownTree1"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3>RTL:</h3>
+                        <div class="dropdown dropdown-tree mytreeview" id="firstDropDownTre2"></div>
                     </td>
                 </tr>
             </table>
